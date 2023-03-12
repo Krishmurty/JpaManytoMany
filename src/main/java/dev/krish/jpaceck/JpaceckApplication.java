@@ -23,6 +23,9 @@ public class JpaceckApplication {
 	@Bean
 	public CommandLineRunner demo(StudentRepository repository) {
 		return (args) -> {
+
+			int avProc =Runtime.getRuntime().availableProcessors();
+			log.info("Number of processors:"+avProc);
 			// save a few customers
 			Course course1 = new Course("Stats", "MathnScience");
 			Course course2 = new Course("DataScience", "Computers");
@@ -43,6 +46,7 @@ public class JpaceckApplication {
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
 			for (Student student : repository.findAll()) {
+				Set<Course> courses =student.getLikedCourses();
 				log.info(student.toString());
 			}
 			log.info("");
